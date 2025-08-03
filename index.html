@@ -576,8 +576,11 @@
         </div>
     </div>
 
+    <!-- Audio elements for birthday music -->
     <audio id="birthdayAudio" preload="auto">
-        <source src="data:audio/mpeg;base64," type="audio/mpeg">
+        <!-- Thêm link bài hát Happy Birthday ở đây -->
+        <source src="./music.mp3" type="audio/mpeg">
+        <!-- Bạn có thể thay link này bằng link bài hát Happy Birthday khác -->
     </audio>
 
     <script>
@@ -672,19 +675,80 @@
 
         // Phát nhạc sinh nhật
         function playBirthdaySong() {
+            const audio = document.getElementById('birthdayAudio');
+            const musicBtn = document.querySelector('button[onclick="playBirthdaySong()"]');
+            
             if (!musicPlaying) {
-                // Tạo nốt nhạc bay
-                const musicInterval = setInterval(() => {
-                    createMusicNote();
-                }, 500);
+                // Bắt đầu phát nhạc
+                audio.play().then(() => {
+                    musicPlaying = true;
+                    
+                    // Thay đổi giao diện button
+                    musicBtn.textContent = '🎵 Đang phát nhạc...';
+                    musicBtn.style.background = 'linear-gradient(45deg, #e74c3c, #f39c12)';
+                    
+                    // Tạo nốt nhạc bay
+                    const musicInterval = setInterval(() => {
+                        createMusicNote();
+                    }, 500);
+                    
+                    // Lưu interval để có thể clear
+                    window.musicInterval = musicInterval;
+                    
+                    alert('🎵 Đang phát nhạc sinh nhật! Happy Birthday to You! 🎂');
+                    
+                }).catch(error => {
+                    // Nếu không phát được, hiển thị thông báo
+                    console.log('Không thể phát nhạc:', error);
+                    alert('🎵 Happy Birthday to You! 🎂\n(Nhạc cần được bật âm thanh trình duyệt)');
+                    
+                    // Vẫn tạo hiệu ứng nốt nhạc
+                    const musicInterval = setInterval(() => {
+                        createMusicNote();
+                    }, 500);
+                    
+                    setTimeout(() => {
+                        clearInterval(musicInterval);
+                    }, 8000);
+                });
+                
+            } else {
+                // Dừng nhạc
+                stopMusic();
+            }
+            
+            // Xử lý khi nhạc kết thúc
+            audio.onended = function() {
+                stopMusic();
+            };
+        }
 
-                musicPlaying = true;
-                alert('🎵 Đang phát nhạc sinh nhật! Happy Birthday to You! 🎵');
-
-                setTimeout(() => {
-                    clearInterval(musicInterval);
-                    musicPlaying = false;
-                }, 10000);
+        // Dừng nhạc
+        function stopMusic() {
+            const audio = document.getElementById('birthdayAudio');
+            const musicBtn = document.querySelector('button[onclick="playBirthdaySong()"]');
+            
+            // Dừng audio
+            audio.pause();
+            audio.currentTime = 0;
+            
+            // Reset trạng thái
+            musicPlaying = false;
+            
+            // Reset button
+            musicBtn.textContent = '🎵 Phát nhạc sinh nhật';
+            musicBtn.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4)';
+            
+            // Dừng hiệu ứng nốt nhạc
+            if (window.musicInterval) {
+                clearInterval(window.musicInterval);
+                window.musicInterval = null;
+            }
+            
+            // Dừng Web Audio Context nếu có
+            if (window.currentAudioContext) {
+                window.currentAudioContext.close();
+                window.currentAudioContext = null;
             }
         }
 
