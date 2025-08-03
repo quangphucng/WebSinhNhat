@@ -1,13 +1,508 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎉 Chúc Mừng Sinh Nhật Trần Bình Minh! 🎂</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
+            margin-bottom: 30px;
+            animation: bounceIn 2s ease-out;
+        }
+
+        .main-title {
+            font-size: 3.5em;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .name-highlight {
+            color: #ffeb3b;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .birthday-cake {
+            font-size: 8em;
+            animation: bounce 2s infinite;
+            margin: 30px 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .birthday-cake:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .wish-text {
+            font-size: 1.8em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 20px 0;
+            line-height: 1.6;
+            animation: fadeInUp 3s ease-out;
+        }
+
+        .buttons-container {
+            margin: 40px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+        }
+
+        .btn:active {
+            transform: translateY(-2px);
+        }
+
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: explode 2s ease-out infinite;
+        }
+
+        .balloons {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 3em;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        .age-counter {
+            font-size: 2.5em;
+            color: #ffeb3b;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin: 20px 0;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .gift-box {
+            font-size: 4em;
+            margin: 20px;
+            cursor: pointer;
+            animation: wiggle 1s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .music-note {
+            position: fixed;
+            font-size: 2em;
+            color: #ffeb3b;
+            animation: musical 4s linear infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .surprise-message {
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px auto;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            animation: slideIn 1s ease-out;
+        }
+
+        .surprise-message.show {
+            display: block;
+        }
+
+        .surprise-message h3 {
+            color: #e74c3c;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .surprise-message p {
+            color: #2c3e50;
+            font-size: 1.3em;
+            line-height: 1.6;
+        }
+
+        /* Garena Card Styles */
+        .garena-card-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .garena-card-modal.show {
+            display: flex;
+        }
+
+        .garena-card {
+            background: linear-gradient(145deg, #ff6b35, #f7931e);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+            max-width: 400px;
+            width: 90%;
+            animation: cardSlideIn 0.8s ease-out;
+            border: 3px solid #fff;
+        }
+
+        .garena-logo {
+            font-size: 3em;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .card-title {
+            color: #fff;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .card-value {
+            background: #fff;
+            color: #ff6b35;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 15px 0;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .card-code-container {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .card-code-label {
+            color: #333;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .card-code {
+            background: #f8f9fa;
+            border: 2px dashed #ff6b35;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 2px;
+            word-break: break-all;
+            position: relative;
+        }
+
+        .card-code::before {
+            content: "🎁";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: #ff6b35;
+            color: #fff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1em;
+        }
+
+        .copy-button {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .copy-button:active {
+            transform: translateY(0);
+        }
+
+        .close-card-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-card-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .card-instructions {
+            color: #fff;
+            font-size: 0.9em;
+            margin-top: 15px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        .scratch-area {
+            background: #silver;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #c0c0c0,
+                #c0c0c0 10px,
+                #a0a0a0 10px,
+                #a0a0a0 20px
+            );
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scratch-area:hover {
+            background-image: none;
+            background: #fff;
+        }
+
+        .scratch-area::before {
+            content: "🪙 Cào để xem mã thẻ 🪙";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333;
+            font-weight: bold;
+            pointer-events: none;
+        }
+
+        .scratch-area:hover::before {
+            display: none;
+        }
+
+        @keyframes cardSlideIn {
+            0% {
+                transform: scale(0.3) rotate(10deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05) rotate(-2deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #ffd700;
+            font-size: 1.5em;
+            animation: sparkle 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1) rotate(180deg); opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(10deg); }
+            66% { transform: translateY(-15px) rotate(-10deg); }
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #ffeb3b, 0 0 10px #ffeb3b, 0 0 15px #ffeb3b; }
+            100% { text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b, 0 0 30px #ffeb3b; }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        @keyframes musical {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.5em; }
+            .birthday-cake { font-size: 6em; }
+            .wish-text { font-size: 1.4em; }
+            .age-counter { font-size: 2em; }
+            .buttons-container { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
 <body>
     <div class="fireworks" id="fireworks"></div>
     <div class="balloons" id="balloons"></div>
@@ -51,6 +546,34 @@
                 🌅✨🎯
             </p>
         </div>
+
+        <!-- Garena Card Modal -->
+        <div class="garena-card-modal" id="garenaCardModal">
+            <div class="garena-card">
+                <button class="close-card-btn" onclick="closeGarenaCard()">✕</button>
+                
+                <div class="garena-logo">🎮</div>
+                <div class="card-title">GARENA CARD</div>
+                <div class="card-value" id="cardValue">50,000 VNĐ</div>
+                
+                <div class="card-code-container">
+                    <div class="card-code-label">Mã thẻ của bạn:</div>
+                    <div class="scratch-area" id="scratchArea" onclick="revealCode()">
+                        <div class="card-code" id="cardCode" style="display: none;">
+                            XXXX-XXXX-XXXX
+                        </div>
+                    </div>
+                    <button class="copy-button" onclick="copyCode()" style="display: none;" id="copyBtn">
+                        📋 Sao chép mã
+                    </button>
+                </div>
+                
+                <div class="card-instructions">
+                    🎁 Quà sinh nhật đặc biệt từ những người bạn!<br>
+                    Click vào vùng cào để xem mã thẻ
+                </div>
+            </div>
+        </div>
     </div>
 
     <audio id="birthdayAudio" preload="auto">
@@ -60,6 +583,14 @@
     <script>
         let fireworksActive = false;
         let musicPlaying = false;
+        let cardRevealed = false;
+        
+        // Cấu hình thẻ Garena - BẠN CÓ THỂ THAY ĐỔI Ở ĐÂY
+        const garenaCardConfig = {
+            value: "50,000 VNĐ",  // Giá trị thẻ
+            code: "GRNHBD2025BINH",  // Mã thẻ - THAY ĐỔI MÃ Ở ĐÂY
+            serial: "12345678901234"  // Số serial nếu cần
+        };
 
         // Tạo hiệu ứng pháo hoa
         function createFirework() {
@@ -121,14 +652,14 @@
         function blowCandles() {
             const cake = document.querySelector('.birthday-cake');
             cake.textContent = '🎂✨';
-
+            
             // Tạo hiệu ứng pháo hoa
-            for (let i = 0; i < 20; i++) {
+            for(let i = 0; i < 20; i++) {
                 setTimeout(() => createFirework(), i * 100);
             }
 
             // Tạo confetti
-            for (let i = 0; i < 50; i++) {
+            for(let i = 0; i < 50; i++) {
                 setTimeout(() => createConfetti(), i * 50);
             }
 
@@ -176,7 +707,7 @@
         function showSurprise() {
             const surpriseMsg = document.getElementById('surpriseMessage');
             surpriseMsg.classList.add('show');
-
+            
             setTimeout(() => {
                 surpriseMsg.classList.remove('show');
             }, 5000);
@@ -191,37 +722,160 @@
                 "✨ Chúc bạn luôn khỏe mạnh và vui vẻ!",
                 "🌠 Ước mơ của bạn sẽ trở thành hiện thực!"
             ];
-
+            
             const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
             alert(randomWish);
-
+            
             // Tạo hiệu ứng đặc biệt
-            for (let i = 0; i < 10; i++) {
+            for(let i = 0; i < 10; i++) {
                 setTimeout(() => createFirework(), i * 200);
             }
         }
 
-        // Mở quà
+        // Mở quà - Hiển thị thẻ Garena
         function openGift() {
             const giftBox = document.querySelector('.gift-box');
             giftBox.textContent = '🎊';
-
+            
+            // Tạo hiệu ứng pháo hoa
+            for(let i = 0; i < 15; i++) {
+                setTimeout(() => createFirework(), i * 100);
+            }
+            
+            // Hiển thị thẻ Garena sau 1 giây
+            setTimeout(() => {
+                showGarenaCard();
+            }, 1000);
+            
             setTimeout(() => {
                 giftBox.textContent = '🎁';
             }, 2000);
+        }
 
-            alert('🎁 Quà sinh nhật đặc biệt: Một năm mới đầy niềm vui và thành công! 🎊');
+        // Hiển thị thẻ Garena
+        function showGarenaCard() {
+            const modal = document.getElementById('garenaCardModal');
+            const cardValue = document.getElementById('cardValue');
+            
+            // Cập nhật giá trị thẻ
+            cardValue.textContent = garenaCardConfig.value;
+            
+            modal.classList.add('show');
+            cardRevealed = false;
+            
+            // Reset trạng thái cào
+            const scratchArea = document.getElementById('scratchArea');
+            const cardCode = document.getElementById('cardCode');
+            const copyBtn = document.getElementById('copyBtn');
+            
+            scratchArea.style.backgroundImage = `repeating-linear-gradient(
+                45deg,
+                #c0c0c0,
+                #c0c0c0 10px,
+                #a0a0a0 10px,
+                #a0a0a0 20px
+            )`;
+            cardCode.style.display = 'none';
+            copyBtn.style.display = 'none';
+            
+            // Tạo hiệu ứng sparkle
+            createSparkleEffect();
+        }
+
+        // Đóng thẻ Garena
+        function closeGarenaCard() {
+            const modal = document.getElementById('garenaCardModal');
+            modal.classList.remove('show');
+        }
+
+        // Cào để hiện mã thẻ
+        function revealCode() {
+            if (!cardRevealed) {
+                const scratchArea = document.getElementById('scratchArea');
+                const cardCode = document.getElementById('cardCode');
+                const copyBtn = document.getElementById('copyBtn');
+                
+                // Hiệu ứng cào
+                scratchArea.style.background = '#fff';
+                scratchArea.style.backgroundImage = 'none';
+                
+                // Hiển thị mã thẻ
+                cardCode.textContent = garenaCardConfig.code;
+                cardCode.style.display = 'block';
+                copyBtn.style.display = 'inline-block';
+                
+                cardRevealed = true;
+                
+                // Hiệu ứng âm thanh (giả lập)
+                alert('🎉 Chúc mừng! Bạn đã cào được thẻ Garena! 🎮');
+                
+                // Tạo hiệu ứng pháo hoa nhỏ
+                for(let i = 0; i < 10; i++) {
+                    setTimeout(() => createFirework(), i * 150);
+                }
+            }
+        }
+
+        // Sao chép mã thẻ
+        function copyCode() {
+            const codeText = garenaCardConfig.code;
+            
+            // Sao chép vào clipboard
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    const copyBtn = document.getElementById('copyBtn');
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = '✅ Đã sao chép!';
+                    copyBtn.style.background = '#28a745';
+                    
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                        copyBtn.style.background = '#28a745';
+                    }, 2000);
+                });
+            } else {
+                // Fallback cho các trình duyệt cũ
+                const textArea = document.createElement('textarea');
+                textArea.value = codeText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                alert('📋 Đã sao chép mã thẻ: ' + codeText);
+            }
+        }
+
+        // Tạo hiệu ứng sparkle cho thẻ
+        function createSparkleEffect() {
+            const card = document.querySelector('.garena-card');
+            const sparkles = ['✨', '⭐', '💫', '🌟'];
+            
+            for(let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.top = Math.random() * 100 + '%';
+                    card.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 2000);
+                }, i * 300);
+            }
         }
 
         // Tự động tạo bóng bay khi tải trang
-        window.onload = function () {
+        window.onload = function() {
             // Tạo bóng bay ban đầu
-            for (let i = 0; i < 15; i++) {
+            for(let i = 0; i < 15; i++) {
                 setTimeout(() => createBalloon(), i * 300);
             }
 
             // Tạo confetti chào mừng
-            for (let i = 0; i < 30; i++) {
+            for(let i = 0; i < 30; i++) {
                 setTimeout(() => createConfetti(), i * 100);
             }
 
@@ -245,5 +899,4 @@
         }, 2000);
     </script>
 </body>
-
 </html>
