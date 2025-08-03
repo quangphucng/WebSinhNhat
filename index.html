@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Chúc Mừng Sinh Nhật Trần Bình Minh! 🎂</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="fireworks" id="fireworks"></div>
+    <div class="balloons" id="balloons"></div>
+    <div class="confetti" id="confetti"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">
+                🎉 CHÚC MỪNG SINH NHẬT 🎉<br>
+                <span class="name-highlight">TRẦN BÌNH MINH</span>
+            </h1>
+        </div>
+
+        <div class="birthday-cake" onclick="blowCandles()">🎂</div>
+
+        <div class="age-counter" id="ageCounter">
+            🎈 Chúc bạn tuổi mới hạnh phúc! 🎈
+        </div>
+
+        <div class="wish-text">
+            Chúc bạn một sinh nhật thật vui vẻ và ý nghĩa! 🌟<br>
+            Mong rằng tuổi mới sẽ mang đến cho bạn<br>
+            nhiều niềm vui, sức khỏe và thành công! 💝
+        </div>
+
+        <div class="buttons-container">
+            <button class="btn" onclick="playBirthdaySong()">🎵 Phát nhạc sinh nhật</button>
+            <button class="btn" onclick="showFireworks()">🎆 Bắn pháo hoa</button>
+            <button class="btn" onclick="showSurprise()">🎁 Tin nhắn bất ngờ</button>
+            <button class="btn" onclick="makeAWish()">⭐ Ước một điều</button>
+        </div>
+
+        <div class="gift-box" onclick="openGift()">🎁</div>
+
+        <div class="surprise-message" id="surpriseMessage">
+            <h3>🎊 Lời chúc đặc biệt! 🎊</h3>
+            <p>
+                Chúc Trần Bình Minh luôn tỏa sáng như ánh bình minh,<br>
+                mang lại hy vọng và niềm vui cho mọi người xung quanh!<br><br>
+                Tuổi mới - Ước mơ mới - Thành công mới!<br>
+                🌅✨🎯
+            </p>
+        </div>
+    </div>
+
+    <audio id="birthdayAudio" preload="auto">
+        <source src="data:audio/mpeg;base64," type="audio/mpeg">
+    </audio>
+
+    <script>
+        let fireworksActive = false;
+        let musicPlaying = false;
+
+        // Tạo hiệu ứng pháo hoa
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = Math.random() * 100 + '%';
+            firework.style.top = Math.random() * 100 + '%';
+            firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.getElementById('fireworks').appendChild(firework);
+
+            setTimeout(() => {
+                firework.remove();
+            }, 2000);
+        }
+
+        // Tạo bóng bay
+        function createBalloon() {
+            const colors = ['🎈', '🎈', '🎈'];
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.textContent = colors[Math.floor(Math.random() * colors.length)];
+            balloon.style.left = Math.random() * 100 + '%';
+            balloon.style.animationDelay = Math.random() * 2 + 's';
+            balloon.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.getElementById('balloons').appendChild(balloon);
+        }
+
+        // Tạo confetti
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#fd79a8'];
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti-piece';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDelay = Math.random() * 3 + 's';
+            document.getElementById('confetti').appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        }
+
+        // Tạo nốt nhạc bay
+        function createMusicNote() {
+            const notes = ['♪', '♫', '♬', '♩'];
+            const musicNote = document.createElement('div');
+            musicNote.className = 'music-note';
+            musicNote.textContent = notes[Math.floor(Math.random() * notes.length)];
+            musicNote.style.left = Math.random() * 100 + '%';
+            musicNote.style.animationDelay = Math.random() * 4 + 's';
+            document.body.appendChild(musicNote);
+
+            setTimeout(() => {
+                musicNote.remove();
+            }, 4000);
+        }
+
+        // Thổi nến
+        function blowCandles() {
+            const cake = document.querySelector('.birthday-cake');
+            cake.textContent = '🎂✨';
+
+            // Tạo hiệu ứng pháo hoa
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => createFirework(), i * 100);
+            }
+
+            // Tạo confetti
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => createConfetti(), i * 50);
+            }
+
+            setTimeout(() => {
+                cake.textContent = '🎂';
+            }, 3000);
+
+            alert('🎉 Chúc mừng! Bạn đã thổi nến thành công! Ước gì cũng thành hiện thực! ⭐');
+        }
+
+        // Phát nhạc sinh nhật
+        function playBirthdaySong() {
+            if (!musicPlaying) {
+                // Tạo nốt nhạc bay
+                const musicInterval = setInterval(() => {
+                    createMusicNote();
+                }, 500);
+
+                musicPlaying = true;
+                alert('🎵 Đang phát nhạc sinh nhật! Happy Birthday to You! 🎵');
+
+                setTimeout(() => {
+                    clearInterval(musicInterval);
+                    musicPlaying = false;
+                }, 10000);
+            }
+        }
+
+        // Hiển thị pháo hoa
+        function showFireworks() {
+            if (!fireworksActive) {
+                fireworksActive = true;
+                const fireworkInterval = setInterval(() => {
+                    createFirework();
+                }, 200);
+
+                setTimeout(() => {
+                    clearInterval(fireworkInterval);
+                    fireworksActive = false;
+                }, 5000);
+            }
+        }
+
+        // Hiển thị tin nhắn bất ngờ
+        function showSurprise() {
+            const surpriseMsg = document.getElementById('surpriseMessage');
+            surpriseMsg.classList.add('show');
+
+            setTimeout(() => {
+                surpriseMsg.classList.remove('show');
+            }, 5000);
+        }
+
+        // Ước một điều
+        function makeAWish() {
+            const wishes = [
+                "⭐ Ước gì cũng thành hiện thực!",
+                "🌟 Chúc bạn luôn hạnh phúc và thành công!",
+                "💫 Mong bạn có một năm mới tuyệt vời!",
+                "✨ Chúc bạn luôn khỏe mạnh và vui vẻ!",
+                "🌠 Ước mơ của bạn sẽ trở thành hiện thực!"
+            ];
+
+            const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+            alert(randomWish);
+
+            // Tạo hiệu ứng đặc biệt
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => createFirework(), i * 200);
+            }
+        }
+
+        // Mở quà
+        function openGift() {
+            const giftBox = document.querySelector('.gift-box');
+            giftBox.textContent = '🎊';
+
+            setTimeout(() => {
+                giftBox.textContent = '🎁';
+            }, 2000);
+
+            alert('🎁 Quà sinh nhật đặc biệt: Một năm mới đầy niềm vui và thành công! 🎊');
+        }
+
+        // Tự động tạo bóng bay khi tải trang
+        window.onload = function () {
+            // Tạo bóng bay ban đầu
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => createBalloon(), i * 300);
+            }
+
+            // Tạo confetti chào mừng
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => createConfetti(), i * 100);
+            }
+
+            // Hiệu ứng chúc mừng ban đầu
+            setTimeout(() => {
+                alert('🎉 Chúc mừng sinh nhật Trần Bình Minh! 🎂\nChúc bạn có một ngày sinh nhật thật đặc biệt! 🎈');
+            }, 1000);
+        };
+
+        // Tạo hiệu ứng liên tục
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                createBalloon();
+            }
+        }, 3000);
+
+        setInterval(() => {
+            if (Math.random() > 0.8) {
+                createConfetti();
+            }
+        }, 2000);
+    </script>
+</body>
+
+</html>
